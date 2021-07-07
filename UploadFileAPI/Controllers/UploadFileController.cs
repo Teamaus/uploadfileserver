@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using UploadFileAPI.Model;
 
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace UploadFileAPI.Controllers
@@ -31,18 +32,21 @@ namespace UploadFileAPI.Controllers
 
         // POST api/<UploadFileController>
         [HttpPost]
-        public void Post()
+        public void Post(FileModel fileModel)
         {
-            var request = HttpContext.Request;
-            var file = request.Form.Files[0];
-            //Path should be take froom up serttings.  
-            var path = @"C:\DOD\Dev\angular-course\drawingappclientdemo\src\assets\images\" + file.FileName;
-            using(var stream = new FileStream(path, FileMode.Create))
+            byte[] bytes = Convert.FromBase64String(fileModel.File.Split(',')[1]);
+
+            using (BinaryWriter writer = new BinaryWriter(System.IO.File.Open(@"C:\DOD\Dev++\fullstack_course_2021_4\repos\fsfinalclient_training\FileUpload\src\assets\test.png", FileMode.Create))) 
             {
-                file.CopyTo(stream);
+                writer.Write(bytes);
+
             }
 
+
+
         }
+
+   
 
         // PUT api/<UploadFileController>/5
         [HttpPut("{id}")]

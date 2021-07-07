@@ -8,7 +8,7 @@ namespace UploadFileAPI.Model
 {
     public class FileModel
     {
-        public string FilName { get; set; }
-        public IFormFile FormFile { get; set; }
+     
+        public string File { get; set; }
     }
 }
